@@ -27,7 +27,7 @@ describe "Rool::Blank" do
       @basic_test = Rool::Basic.new.to_json
       expect(Rool::Basic.from_json(@basic_test)).to be_a_kind_of(Rool::Basic)
     end
-    it 'converts to a Basic class from json with ^o key of a nested' do
+    it 'converts to a Basic class from json with ^o key of a nested class' do
       @nested_test = Rool::Email.new.to_json
       expect(Rool::Basic.from_json(@nested_test)).to be_a_kind_of(Rool::Basic)
     end
