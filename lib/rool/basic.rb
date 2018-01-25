@@ -1,4 +1,3 @@
-require 'json'
 require 'oj'
 
 class Rool::Basic
@@ -16,12 +15,12 @@ class Rool::Basic
     return false unless dataset.key?(@data_key)
   end
 
-  def jsonify
-  	Oj::dump self, :indent => 2
+  def to_json
+  	Oj::dump self, :indent => 2 #indented for graphical representation
   end
 
   def self.from_json(json)
-  	Oj.load(json)
+  	Oj.load(json) unless !Oj.load(json).kind_of?(self)
   end
 
 end
