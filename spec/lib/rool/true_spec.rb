@@ -1,4 +1,3 @@
-
 describe "Rool::True" do
   describe '#process' do
     it 'always returns true' do

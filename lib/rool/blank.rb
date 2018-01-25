@@ -9,10 +9,14 @@ module Rool
   				return true
   			end
   		end
+      if dataset[@data_key].class == Integer
+        self.instance_variable_set(:@result, false)
+        self.instance_variable_set(:@message, "The value of #{dataset[@data_key]} is not blank.")
+        return false
+      elsif dataset[@data_key].nil? || dataset[@data_key].empty?
+    		return true
+      end
 
-  		if dataset[@data_key].nil? || dataset[@data_key].empty?
-  			return true
-  		end
       self.instance_variable_set(:@result, false)
       self.instance_variable_set(:@message, "The value of #{dataset[@data_key]} is not blank.")
   		false
