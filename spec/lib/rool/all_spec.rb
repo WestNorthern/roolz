@@ -8,6 +8,10 @@ describe "Rool::All" do
       expect(Rool::All.new(Rool::True.new, Rool::True.new).process).to be(true)
     end
 
+    it 'returns true if all the children rules are true for the dataset when nested two deep' do
+      expect(Rool::All.new(Rool::All.new(Rool::True.new, Rool::True.new), Rool::All.new(Rool::True.new, Rool::True.new)).process).to be(true)
+    end
+
     ## Expect False
 
     it 'returns false if any of the children rules are false for the dataset' do
@@ -71,6 +75,36 @@ describe "Rool::All" do
     end
     it 'returns only an array of messages from children methods that test false' do
       expect(Rool::All.new(@email_test, @blank_pass, @regex_test, @equal_test, @true_test).message(@data)).to eql(["@gmail.ryan is probably not an e-mail address.", "(?i-mx:DenverDurham) cannot be found in the data set with regexp.", "1 is not equal to 2"])
+    end
+  end
+
+  describe '#to_json' do
+
+    it 'converts a container class and children to json' do
+      expect(Rool::All.new(Rool::True.new, Rool::True.new).to_json).to eql("{\n  \"^o\":\"Rool::All\",\n  \"children\":[\n    {\n      \"^o\":\"Rool::True\",\n      \"data_key\":null,\n      \"operand\":null,\n      \"result\":true,\n      \"message\":null\n    },\n    {\n      \"^o\":\"Rool::True\",\n      \"data_key\":null,\n      \"operand\":null,\n      \"result\":true,\n      \"message\":null\n    }\n  ],\n  \"result\":true\n}\n")
+    end
+
+    it 'converts a container class and children to json nested two deep' do
+      expect(Rool::All.new(Rool::All.new(Rool::True.new, Rool::True.new), Rool::All.new(Rool::True.new, Rool::True.new)).to_json).to eql("{\n  \"^o\":\"Rool::All\",\n  \"children\":[\n    {\n      \"^o\":\"Rool::All\",\n      \"children\":[\n        {\n          \"^o\":\"Rool::True\",\n          \"data_key\":null,\n          \"operand\":null,\n          \"result\":true,\n          \"message\":null\n        },\n        {\n          \"^o\":\"Rool::True\",\n          \"data_key\":null,\n          \"operand\":null,\n          \"result\":true,\n          \"message\":null\n        }\n      ],\n      \"result\":true\n    },\n    {\n      \"^o\":\"Rool::All\",\n      \"children\":[\n        {\n          \"^o\":\"Rool::True\",\n          \"data_key\":null,\n          \"operand\":null,\n          \"result\":true,\n          \"message\":null\n        },\n        {\n          \"^o\":\"Rool::True\",\n          \"data_key\":null,\n          \"operand\":null,\n          \"result\":true,\n          \"message\":null\n        }\n      ],\n      \"result\":true\n    }\n  ],\n  \"result\":true\n}\n")
+    end
+    
+  end
+
+  describe '#from_json' do
+
+    it 'converts to a container class with nested objects from json' do
+      @container_test = Rool::All.new(Rool::True.new, Rool::True.new).to_json
+      expect(Rool::Container.from_json(@container_test)).to be_a_kind_of(Rool::Container)
+    end
+
+    it 'converts All class with nested objects from json' do
+      @all_test = Rool::All.new(Rool::True.new, Rool::True.new).to_json
+      expect(Rool::Container.from_json(@all_test)).to be_a_kind_of(Rool::All)
+    end
+    
+    it 'returns nil when trying to convert a nested class from json with ^o key of a different nested class' do
+      @test = Rool::All.new(Rool::True.new, Rool::True.new).to_json
+      expect(Rool::Any.from_json(@test)).to be(nil)
     end
   end
 end
