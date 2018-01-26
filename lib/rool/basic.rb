@@ -10,7 +10,7 @@ class Rool::Basic
     @message = nil
   end
 
-  def process(dataset = {})
+  def process(dataset = {}, *args)
     raise ArgumentError.new("Expected the dataset to be a ruby Hash") unless dataset.kind_of?(Hash)
     return false unless dataset.key?(@data_key)
   end
