@@ -12,29 +12,45 @@ module Rool
       @list = {}
       # @arg_list = @all_array.map { |x| rule_type.new(x, @operand) }
       @arg_list = []
+
       @all_array.each_with_index do |x, y|
         @list[y] = x
-        @arg_list.push(rule_type.new(y, @operand))
       end
+      puts "the key"
+      p @list.keys[0]
+
+      @all_array.each_with_index do |x, y|
+        @arg_list.push(rule_type.new(@list.keys[y], @operand))
+      end
+
       puts "The List Hash"
       p @list
       puts "The array"
       p @all_array
 
+      @arg_list.each do |x|
+        x.process(@list)
+      end
+
+      # @to_process.message(@list)
+
       @to_process = container_type.new(*@arg_list)
-      p @to_process
+
       @to_process.process(@list)
-      p @to_process
-      @to_process
-
-      ## Check ALL again. It is processing the first child of the object and not hitting the rest
 
 
+      return @to_process
       
     end
   end
 end
 
 # @new = Rool::Iterate.new(:foo, 10)
-# @data = {foo: [1, 2, 3]}
+# @data = {foo: [1, 2, 3], bar: 20, baz: 15}
 # @new.process(@data, Rool::All, Rool::Equal)
+
+# @all_test = Rool::All.new(Rool::Equal.new(:foo, 10), Rool::Equal.new(:bar, 10), Rool::Equal.new(:baz, 30))
+# @all_test.process(@data)
+
+# @equal_test = Rool::Equal.new(:bar, 10)
+# @equal_test.process(@data)
