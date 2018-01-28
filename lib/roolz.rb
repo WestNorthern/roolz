@@ -3,6 +3,8 @@
 module Rool
 end
 
+puts "But you are getting here..."
+
 require File.join(__dir__, 'rool/basic')
 
 require File.join(__dir__, 'rool/container')

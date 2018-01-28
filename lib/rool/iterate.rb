@@ -4,40 +4,30 @@ module Rool
 
     def process(dataset, container_type, rule_type)
       super
+
+      # spec for checking if data is an array
+      # spec for checking if each element of the array responds to rule_type
       @all_array = dataset[@data_key].clone
 
-      # rule_type.new(@data_key, @operand).process(@new_data)
-      # @new_data = { @data_key => @new_key }
-      # @new_key = @key.public_send(method_name) if @key.respond_to? method_name
       @list = {}
-      # @arg_list = @all_array.map { |x| rule_type.new(x, @operand) }
+      
       @arg_list = []
 
       @all_array.each_with_index do |x, y|
         @list[y] = x
       end
-      puts "the key"
-      p @list.keys[0]
 
       @all_array.each_with_index do |x, y|
         @arg_list.push(rule_type.new(@list.keys[y], @operand))
       end
 
-      puts "The List Hash"
-      p @list
-      puts "The array"
-      p @all_array
-
       @arg_list.each do |x|
         x.process(@list)
       end
 
-      # @to_process.message(@list)
-
       @to_process = container_type.new(*@arg_list)
 
       @to_process.process(@list)
-
 
       return @to_process
       

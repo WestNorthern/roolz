@@ -3,6 +3,7 @@ module Rool
   	
     def process(dataset={})
       if @children.all?{|r| r.process(dataset)}
+      	self.instance_variable_set(:@result, true)
       	return true
       else
       	self.instance_variable_set(:@result, false)
