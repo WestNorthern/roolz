@@ -16,6 +16,7 @@ module Rool
   		
   		dataset.values.each do |value|
   			if value == @operand
+  				self.instance_variable_set(:@result, true)
   				return true
   			end
   		end

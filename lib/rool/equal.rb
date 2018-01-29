@@ -5,6 +5,7 @@ module Rool
 
       if (dataset[@data_key].respond_to?(:>) && @operand.respond_to?(:>))
       	if @operand == dataset[@data_key]
+      		self.instance_variable_set(:@result, true)
       		return true
       	else
       		self.instance_variable_set(:@result, false)

@@ -6,6 +6,7 @@ module Rool
   		# Optional method to return blank if value is nothing but white space
   		if dataset[@data_key].is_a?(String)
   			if dataset[@data_key].strip == ''
+          self.instance_variable_set(:@result, true)
   				return true
   			end
   		end
@@ -14,6 +15,7 @@ module Rool
         self.instance_variable_set(:@message, "The value of #{dataset[@data_key]} is not blank.")
         return false
       elsif dataset[@data_key].nil? || dataset[@data_key].empty?
+        self.instance_variable_set(:@result, true)
     		return true
       end
 

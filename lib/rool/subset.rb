@@ -17,6 +17,7 @@ module Rool
       	key_set = dataset[@data_key].to_set
       	operand_set = @operand.to_set
       	if operand_set.subset?(key_set) || operand_set == key_set
+          self.instance_variable_set(:@result, true)
           return true
         else
           self.instance_variable_set(:@result, false)

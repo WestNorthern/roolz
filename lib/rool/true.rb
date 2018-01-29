@@ -6,7 +6,7 @@ module Rool
       	self.instance_variable_set(:@result, false)
       	self.instance_variable_set(:@message, "Something has gone terribly wrong. This should always be true.")
       end
-
+      self.instance_variable_set(:@result, true)
       true
     end
   end
