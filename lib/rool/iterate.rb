@@ -4,10 +4,15 @@ module Rool
 
     def process(dataset, container_type, rule_type)
       super
-
       # spec for checking if data is an array
       # spec for checking if each element of the array responds to rule_type
       @all_array = dataset[@data_key].clone
+
+      if @all_array.kind_of?(Array) == false
+        self.instance_variable_set(:@result, false)
+        self.instance_variable_set(:@message, "The data type being passed into the key is not an array of numbers.")
+        return false
+      end
 
       @list = {}
       
