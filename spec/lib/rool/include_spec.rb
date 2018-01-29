@@ -3,30 +3,40 @@ describe "Rool::Include" do
 
     before :each do
       @data = {
-        foo: 'bar',
+        foo: ['bar', 'baz'],
         fizz: 'Buzz',
         cool_number: 262,
-        gettin_jiggy: ['wit', 'It'],
+        baz: [ 1, 2, 3, 4, 5, 6, 7 ],
         did_you_know: 'That Nas wrote that song?'
       }
     end
 
     ## Expect True
 
-    it "returns true if the operand matches one of the data key values" do
-      expect(Rool::Include.new(:cool, 'bar').process(@data)).to eq(true)
+    it "returns true if the operand matches one of the data key values as an integer" do
+      expect(Rool::Include.new(:baz, 1).process(@data)).to eq(true)
     end
 
-    it "returns true if the operand matches one of the data key values" do
-      expect(Rool::Include.new(:foo, 'Buzz').process(@data)).to eq(true)
+    it "returns true if the operand matches one of the data key values as a string" do
+      expect(Rool::Include.new(:foo, 'bar').process(@data)).to eq(true)
     end
+
 
     ## Expect False
 
-    it "returns false if the operand is not included in the data key set" do
-      expect(Rool::Include.new(:fizz, 'Texas').process(@data)).to eq(false)
+    it "returns false if the operand is not included in the data key set as string" do
+      expect(Rool::Include.new(:foo, 'Texas').process(@data)).to eq(false)
     end
+
+    it "returns false if the operand is not included in the data key set as integer" do
+      expect(Rool::Include.new(:baz, 47).process(@data)).to eq(false)
+    end
+
     it "returns false if the operand is nil" do
+      expect(Rool::Include.new(:baz, nil).process(@data)).to eq(false)
+    end
+
+    it "returns false if the data type is not an array" do
       expect(Rool::Include.new(:fizz, nil).process(@data)).to eq(false)
     end
 
@@ -35,7 +45,7 @@ describe "Rool::Include" do
     it 'will have a false result attribute and a message after a false return' do
       @false_test = Rool::Include.new(:foo, 232)
       @false_test.process(@data)
-      expect(@false_test).to have_attributes(result: false, message: "232 does not match any values in the data set.")
+      expect(@false_test).to have_attributes(result: false, message: "The operand is not included in the array.")
     end
 
     it 'will have a false result attribute and a message after a false return for nil operand' do

@@ -8,7 +8,7 @@ class Rool::Container
       raise ArgumentError.new("Expected children rules to be objects in the Rool namespace")
     end
     @children = children_rules
-    @result = true
+    @result = nil
   end
 
   def process(dataset={})

@@ -5,6 +5,7 @@ module Rool
   		email = dataset[@data_key]
 		  valid = '[A-Za-z\d.+-]+' #Commonly encountered email address characters
 		  if (email =~ /#{valid}@#{valid}\.#{valid}/) == 0
+		  	self.instance_variable_set(:@result, true)
 		  	return true
 		  else
 		  	self.instance_variable_set(:@result, false)

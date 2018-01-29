@@ -6,7 +6,6 @@ Gem::Specification.new do |s|
   s.description = 'A data-agnostic rules engine'
   s.authors = ['Nate Smith', 'Jonathan Fox', 'Ryan Richardson']
   s.email = 'nate@chargeback.com'
-  # s.files = ['lib/roolz.rb', 'lib/rool/basic.rb']
   s.files = Dir['lib/**/*.rb', 'lib/roolz.rb']
   # s.homepage = 'todo'
   s.license = 'MIT'

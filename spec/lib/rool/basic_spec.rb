@@ -1,4 +1,4 @@
-describe "Rool::Blank" do
+describe "Rool::Basic" do
 
 
   before :each do
@@ -14,10 +14,10 @@ describe "Rool::Blank" do
   describe '#to_json' do
 
     it 'converts a Basic class to json' do
-      expect(Rool::Basic.new.to_json).to eql("{\n  \"^o\":\"Rool::Basic\",\n  \"data_key\":null,\n  \"operand\":null,\n  \"result\":true,\n  \"message\":null\n}\n")
+      expect(Rool::Basic.new.to_json).to eql("{\n  \"^o\":\"Rool::Basic\",\n  \"data_key\":null,\n  \"operand\":null,\n  \"result\":null,\n  \"message\":null\n}\n")
     end
     it 'converts a nested class to json' do
-      expect(Rool::Email.new.to_json).to eql("{\n  \"^o\":\"Rool::Email\",\n  \"data_key\":null,\n  \"operand\":null,\n  \"result\":true,\n  \"message\":null\n}\n")
+      expect(Rool::Email.new.to_json).to eql("{\n  \"^o\":\"Rool::Email\",\n  \"data_key\":null,\n  \"operand\":null,\n  \"result\":null,\n  \"message\":null\n}\n")
     end
   end
 
