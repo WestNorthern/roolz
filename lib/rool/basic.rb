@@ -24,3 +24,4 @@ class Rool::Basic
   end
 
 end
+
