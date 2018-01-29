@@ -3,7 +3,7 @@
 module Rool
 end
 
-puts "Loading the Roolz Gem . . ."
+puts "Loading the Roolz Gem..."
 
 require File.join(__dir__, 'rool/basic')
 
