@@ -27,7 +27,7 @@ module Rool
   		
   		
   		##
-  		# According to my initial guess at what the function did.
+  		#   According to my initial guess at what the function did.
   		##
   		# dataset.values.each do |value|
   		# 	if value == @operand
@@ -37,7 +37,7 @@ module Rool
   		# end
 
   		self.instance_variable_set(:@result, false)
-      self.instance_variable_set(:@message, "Value is not able to be compared")
+      self.instance_variable_set(:@message, "Value is not able to be compared.")
   		return false
   	end
   end

@@ -39,13 +39,3 @@ module Rool
     end
   end
 end
-
-# @new = Rool::Iterate.new(:foo, 10)
-# @data = {foo: [1, 2, 3], bar: 20, baz: 15}
-# @new.process(@data, Rool::All, Rool::Equal)
-
-# @all_test = Rool::All.new(Rool::Equal.new(:foo, 10), Rool::Equal.new(:bar, 10), Rool::Equal.new(:baz, 30))
-# @all_test.process(@data)
-
-# @equal_test = Rool::Equal.new(:bar, 10)
-# @equal_test.process(@data)

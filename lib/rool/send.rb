@@ -5,7 +5,6 @@ module Rool
     def process(dataset, method_name, rule_type)
       super
       @key = dataset[@data_key].clone
-      p @data_key
 
       @new_key = @key.public_send(method_name) if @key.respond_to? method_name
 

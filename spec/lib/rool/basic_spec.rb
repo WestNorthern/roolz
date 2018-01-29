@@ -1,4 +1,4 @@
-describe "Rool::Blank" do
+describe "Rool::Basic" do
 
 
   before :each do
